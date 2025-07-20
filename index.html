@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+        }
+        .calculator {
+            width: 300px;
+            background-color: black;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .screen {
+            width: 100%;
+            height: 60px;
+            text-align: right;
+            font-size: 2em;
+            color: white;
+            border: none;
+            background: black;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            width: 100%;
+            height: 60px;
+            font-size: 1.5em;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .gray { background: #a5a5a5; color: black; }
+        .dark-gray { background: #333; color: white; }
+        .orange { background: #ff9500; color: white; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="screen" id="display" disabled>
+        <div class="buttons">
+            <button class="gray" onclick="clearDisplay()">AC</button>
+            <button class="gray" onclick="inputValue('+/-')">+/-</button>
+            <button class="gray" onclick="inputValue('%')">%</button>
+            <button class="orange" onclick="inputValue('/')">&divide;</button>
+            <button class="dark-gray" onclick="inputValue('7')">7</button>
+            <button class="dark-gray" onclick="inputValue('8')">8</button>
+            <button class="dark-gray" onclick="inputValue('9')">9</button>
+            <button class="orange" onclick="inputValue('*')">&times;</button>
+            <button class="dark-gray" onclick="inputValue('4')">4</button>
+            <button class="dark-gray" onclick="inputValue('5')">5</button>
+            <button class="dark-gray" onclick="inputValue('6')">6</button>
+            <button class="orange" onclick="inputValue('-')">-</button>
+            <button class="dark-gray" onclick="inputValue('1')">1</button>
+            <button class="dark-gray" onclick="inputValue('2')">2</button>
+            <button class="dark-gray" onclick="inputValue('3')">3</button>
+            <button class="orange" onclick="inputValue('+')">+</button>
+            <button class="dark-gray" style="grid-column: span 2; border-radius: 30px;" onclick="inputValue('0')">0</button>
+            <button class="dark-gray" onclick="inputValue('.')">.</button>
+            <button class="orange" onclick="calculate()">=</button>
+        </div>
+    </div>
+    <script>
+        let display = document.getElementById('display');
+        function inputValue(value) {
+            if (value === '+/-') {
+                display.value = display.value ? -parseFloat(display.value) : '';
+            } else {
+                display.value += value;
+            }
+        }
+        function clearDisplay() {
+            display.value = '';
+        }
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
